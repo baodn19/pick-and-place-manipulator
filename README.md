@@ -1,6 +1,15 @@
-# mycobot_ros2 #
+<div align="center" style="text-align: center;">
+
+<h1>Pick & Place Manipulator</h1>
+
+<p>
+  <b>A simulated MyCobot280 6 DOF manipulator for learning perception with the Point Cloud Library and motion planning with MoveIt2. Source: <a href="https://www.youtube.com/playlist?list=PLNWNEEf8BvG6lbOxH9AiXNetYcVgcJeWk">Automatic Addison</a></b>
+</p>
+
 ![OS](https://img.shields.io/ubuntu/v/ubuntu-wallpapers/noble)
 ![ROS_2](https://img.shields.io/ros/v/jazzy/rclcpp)
+
+</div>
 
 ## Overview
 This repository contains ROS 2 packages for simulating and controlling the myCobot robotic arm using ROS 2 Control and MoveIt 2. It provides support for Gazebo simulation and visualization in RViz. Gazebo simulation also includes simulated 3D point cloud data from the depth camera (RGBD) sensor plugin for vision.
@@ -26,3 +35,7 @@ This repository contains ROS 2 packages for simulating and controlling the myCob
 - Real-time perception and planning capabilities for responsive robot operation
 
 ![Setup Planning Scene](https://automaticaddison.com/wp-content/uploads/2024/12/creating-planning-scene-800.gif)
+
+## Project Roadmap
+- [ ] Switch to GPU implementation for optimized runtime
+- [ ] Integrate the depth camera at the end effector for active perception
