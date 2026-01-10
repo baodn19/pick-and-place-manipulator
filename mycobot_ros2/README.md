@@ -1,19 +1,28 @@
-## Setting up package
-- This can't be run in a conda environment
-- Version: ROS 2 Jazzy
-- Required packages:
+## Installing dependencies from source
+1. Navigate to `src` in your workspace
+2. Clone the packages below
+- MoveIt 2:
 ```
-sudo apt install ros-jazzy-moveit-task-constructor-core
-sudo apt install ros-jazzy-controller-manager
-sudo apt install ros-jazzy-gripper-controllers
-sudo apt install ros-jazzy-ros2-control
-sudo apt install ros-jazzy-ros2-controllers
-sudo apt install ros-jazzy-moveit-visual-tools
-sudo apt install ros-jazzy-moveit-task-constructor-visualization
-sudo apt install ros-jazzy-gz-ros2-control
-sudo apt install ros-jazzy-moveit-task-constructor-capabilities
+git clone https://github.com/moveit/moveit2.git -b main
+vcs import < moveit2/moveit2.repos
 ```
-- Install dependencies:
-``` 
-rosdep install --from-paths src --ignore-src -r -y
+- MoveIt Task Constructor:
+```
+git clone https://github.com/moveit/moveit_task_constructor.git -b ros2
+```
+- Warehouse ROS Mongo:
+```
+git clone https://github.com/moveit/warehouse_ros.git -b ros2
+git clone https://github.com/moveit/warehouse_ros_mongo.git -b ros2
+```
+3. Install Dependencies
+```
+cd ~/moveit2_ws
+rosdep install -r -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
+```
+4. Build the Workspace
+- If you have limited RAM, run:
+```
+export MAKEFLAGS="-j2"
+colcon build --executor sequential
 ```
