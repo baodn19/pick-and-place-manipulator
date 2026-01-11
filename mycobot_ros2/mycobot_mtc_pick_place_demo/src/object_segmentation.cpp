@@ -46,10 +46,12 @@ std::tuple<pcl::PointIndices::Ptr, pcl::ModelCoefficients::Ptr> fitLineRANSAC(
     int ransac_max_iterations,
     const std::unordered_map<size_t, size_t>& projection_map) {
 
+  // Set up containers to hold the best inliers and line coefficients found.
   pcl::PointIndices::Ptr best_inliers(new pcl::PointIndices);
   pcl::ModelCoefficients::Ptr best_coefficients(new pcl::ModelCoefficients);
   best_coefficients->values.resize(3);
 
+  // Random number generator & uniform distribution generator for unbiased point selection.
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_int_distribution<> dis(0, cloud->points.size() - 1);
@@ -58,12 +60,14 @@ std::tuple<pcl::PointIndices::Ptr, pcl::ModelCoefficients::Ptr> fitLineRANSAC(
     // Randomly select two different points from the cluster to define a candidate line.
     int idx1 = dis(gen);
     int idx2 = dis(gen);
-    if (idx1 == idx2) continue;
+    if (idx1 == idx2) continue; // Ensure two distinct points
 
+    // Compute the line coefficients (a, b, c) that pass through them
     Eigen::Vector2f p1(cloud->points[idx1].x, cloud->points[idx1].y);
     Eigen::Vector2f p2(cloud->points[idx2].x, cloud->points[idx2].y);
     Eigen::Vector3f line = fitLine(p1, p2);
 
+    
     pcl::PointIndices::Ptr inliers(new pcl::PointIndices);
     for (size_t i = 0; i < cloud->points.size(); ++i) {
       Eigen::Vector2f pt(cloud->points[i].x, cloud->points[i].y);
