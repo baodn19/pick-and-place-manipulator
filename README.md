@@ -39,3 +39,4 @@ This repository contains ROS 2 packages for simulating and controlling the myCob
 ## Project Roadmap
 - [ ] Switch to GPU implementation for optimized runtime
 - [ ] Integrate the depth camera at the end effector for active perception
+- [ ] Implement [ViewActive](https://arxiv.org/abs/2409.09997) to avoid occlusion and get the best view of objects
